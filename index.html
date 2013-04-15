@@ -22,9 +22,11 @@
       setInterval(function(){
         var newtweet = streams.home[0];
         var $newtweet = $('<div></div>');
-        $newtweet.text('@' + tweet.user + ': ' + tweet.message);
+        $newtweet.text('@' + newtweet.user + ': ' + newtweet.message);
         if ($newtweet !== $('div:first-child')){
           $newtweet.appendTo($body);
+        }else{
+          console.log('made it here')
         }
       },2000);
 
