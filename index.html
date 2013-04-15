@@ -14,20 +14,21 @@
           while(index >= 0){
             var tweet = streams.home[index];
             var $tweet = $('<div></div>');
-            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+            $tweet.text(tweet.created_at + ': @' + tweet.user + ': ' + tweet.message);
             $tweet.appendTo($body);
             index -= 1;
           }
         setInterval(function(){
           var newtweet = streams.home[streams.home.length-1];
           var $newtweet = $('<div></div>');
-          $newtweet.text('@' + newtweet.user + ': ' + newtweet.message);
-          if ($newtweet !== $('div:first-child')){
+          $newtweet.text(newtweet.created_at + ': @' + newtweet.user + ': ' + newtweet.message);
+          var comparetweet = $('div:first-child').text().substr(0,57);
+          if (newtweet.created_at != comparetweet){
             $newtweet.prependTo($('body'));
           }else{
             console.log('made it here')
           }
-        },2000);
+        },200);
         });
     </script>
   </body>
