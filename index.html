@@ -19,11 +19,11 @@
             index -= 1;
           }
         setInterval(function(){
-          var newtweet = streams.home[0];
+          var newtweet = streams.home[streams.home.length-1];
           var $newtweet = $('<div></div>');
           $newtweet.text('@' + newtweet.user + ': ' + newtweet.message);
           if ($newtweet !== $('div:first-child')){
-            $newtweet.appendTo($('body'));
+            $newtweet.prependTo($('body'));
           }else{
             console.log('made it here')
           }
