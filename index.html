@@ -3,33 +3,67 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
   </head>
   <body>
+    <ul class="navigationbar"><div class="backgrounds"><li class="all">all</li></div></ul>
+    <div class="mainbody"></div>
     <script>
-
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
-        var index = streams.home.length - 1;
-          while(index >= 0){
-            var tweet = streams.home[index];
-            var $tweet = $('<div></div>');
-            $tweet.text(tweet.created_at + ': @' + tweet.user + ': ' + tweet.message);
-            $tweet.appendTo($body);
-            index -= 1;
+        for (key in streams.users){
+          var $users = $('<li></li>');
+          $users.text(key);
+          $users.addClass(key)
+          $users.appendTo($('.navigationbar div'))
+        }
+        $('.backgrounds').on("click", "li",function (){
+          var whichButton = $(this).attr('class');
+          console.log(whichButton, typeof whichButton)
+          var $body = $('.mainbody');
+          $body.html('');
+          if (whichButton === 'all'){
+            var index = streams.home.length - 1;
+            while(index >= 0){
+              var tweet = streams.home[index];
+              var $tweet = $('<div></div>');
+              $tweet.text(tweet.created_at + ': @' + tweet.user + ': ' + tweet.message);
+              console.log(tweet.user, typeof tweet.user);
+              $tweet.appendTo($body);
+              index -= 1;
+            }
+            setInterval(function(){
+              var newtweet = streams.home[streams.home.length-1];
+              var $newtweet = $('<div></div>');
+              $newtweet.text(newtweet.created_at + ': @' + newtweet.user + ': ' + newtweet.message);
+              var comparetweet = $newtweet.text();
+              var comparediv = $('.mainbody div:first-child').text();
+              if (comparediv != comparetweet){
+                $newtweet.prependTo($('.mainbody'));
+              }
+            },200);
+          } else {
+            var index2 = streams.users[whichButton].length - 1;
+            while(index2 >= 0){
+              var tweet2 = streams.users[whichButton][index2];
+              var $tweet2 = $('<div></div>');
+              $tweet2.text(tweet2.created_at + ': @' + tweet2.user + ': ' + tweet2.message);
+              $tweet2.appendTo($body);
+              index2 -= 1;
+            }
+            setInterval(function(){
+              var newtweet2 = streams.users[whichButton][streams.users[whichButton].length-1];
+              var $newtweet2 = $('<div></div>');
+              $newtweet2.text(newtweet2.created_at + ': @' + newtweet2.user + ': ' + newtweet2.message);
+              var comparetweet2 = $newtweet2.text();
+              var comparediv2 = $('.mainbody div:first-child').text();
+              if (comparediv2 != comparetweet2){
+                $newtweet2.prependTo($('.mainbody'));
+              }
+            },200);
           }
-        setInterval(function(){
-          var newtweet = streams.home[streams.home.length-1];
-          var $newtweet = $('<div></div>');
-          $newtweet.text(newtweet.created_at + ': @' + newtweet.user + ': ' + newtweet.message);
-          var comparetweet = $('div:first-child').text().substr(0,57);
-          if (newtweet.created_at != comparetweet){
-            $newtweet.prependTo($('body'));
-          }else{
-            console.log('made it here')
-          }
-        },200);
         });
+
+      });
     </script>
   </body>
 </html>

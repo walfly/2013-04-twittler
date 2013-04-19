@@ -1,0 +1,26 @@
+body {
+	display: block;
+}
+
+.mainbody div {
+	background-color: #E1F9FF;
+}
+
+.navigationbar li{
+	font-size: 20px;
+	font-family: verdana;
+	display:inline-block;
+	margin-left: 1%;
+	border-radius: 5px;
+}
+
+.navigationbar{
+	font-size: 0;
+	background-color: red;
+	list-style-type: none;
+	padding: 10px;
+}
+
+.backgrounds{
+	background-color: white;
+}
