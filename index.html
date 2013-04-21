@@ -31,16 +31,6 @@
               $tweet.appendTo($body);
               index -= 1;
             }
-            setInterval(function(){
-              var newtweet = streams.home[streams.home.length-1];
-              var $newtweet = $('<div></div>');
-              $newtweet.text(newtweet.created_at + ': @' + newtweet.user + ': ' + newtweet.message);
-              var comparetweet = $newtweet.text();
-              var comparediv = $('.mainbody div:first-child').text();
-              if (comparediv != comparetweet){
-                $newtweet.prependTo($body);
-              }
-            },200);
           } else {
             var index2 = streams.users[whichButton].length - 1;
             while(index2 >= 0){
@@ -50,16 +40,6 @@
               $tweet2.appendTo($body);
               index2 -= 1;
             }
-            setInterval(function(){
-              var newtweet2 = streams.users[whichButton][streams.users[whichButton].length-1];
-              var $newtweet2 = $('<div></div>');
-              $newtweet2.text(newtweet2.created_at + ': @' + newtweet2.user + ': ' + newtweet2.message);
-              var comparetweet2 = $newtweet2.text();
-              var comparediv2 = $('.mainbody div:first-child').text();
-              if (comparediv2 != comparetweet2){
-                $newtweet2.prependTo($body);
-              }
-            },200);
           }
         });
 
