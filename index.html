@@ -16,8 +16,8 @@
           $users.addClass(key)
           $users.appendTo($('.navigationbar div'))
         }
-        $('.backgrounds').on("click", "li",function (){
-          var whichButton = $(this).attr('class');
+        $('.backgrounds').on("click", "li", function(){
+          var whichButton = $(this).text();
           console.log(whichButton, typeof whichButton)
           var $body = $('.mainbody');
           $body.html('');
@@ -38,7 +38,7 @@
               var comparetweet = $newtweet.text();
               var comparediv = $('.mainbody div:first-child').text();
               if (comparediv != comparetweet){
-                $newtweet.prependTo($('.mainbody'));
+                $newtweet.prependTo($body);
               }
             },200);
           } else {
@@ -57,7 +57,7 @@
               var comparetweet2 = $newtweet2.text();
               var comparediv2 = $('.mainbody div:first-child').text();
               if (comparediv2 != comparetweet2){
-                $newtweet2.prependTo($('.mainbody'));
+                $newtweet2.prependTo($body);
               }
             },200);
           }
