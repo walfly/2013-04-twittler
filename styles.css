@@ -1,14 +1,17 @@
 body {
 	display: block;
+	background-color: #E1F9FF;
 }
 
 .mainbody div {
-	background-color: #E1F9FF;
+	font-family: Trebuchet;
+	background-color: white;
+	border-radius: 2px;
 }
 
 .navigationbar li{
 	font-size: 20px;
-	font-family: verdana;
+	font-family: Trebuchet;
 	display:inline-block;
 	margin-left: 1%;
 	border-radius: 5px;
@@ -23,4 +26,5 @@ body {
 
 .backgrounds{
 	background-color: white;
+	border-radius: 3px;
 }
