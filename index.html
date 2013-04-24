@@ -8,37 +8,71 @@
   </head>
   <body>
     <ul class="navigationbar"><div class="backgrounds"><li class="all">all</li></div></ul>
+    <div>
+      <textarea id="tweetarea" cols="140" rows="1" maxlength="140" placeholder="tweet"></textarea>
+    </div>
     <div class="mainbody"></div>
     <script>
+      var visitor = prompt("Create a user name");
+      var $visitor = $('<li></li>');
+      $visitor.text(visitor);
+      streams.users[visitor] = [];
       $(document).ready(function(){
         $('abbr.timeago').timeago();
         for (key in streams.users){
           var $users = $('<li></li>');
           $users.text(key);
-          $users.addClass(key)
           $users.appendTo($('.navigationbar div'))
         }
+        $('#tweetarea').keyup(function(key){
+          if(key.keyCode !== 13){
+            return;
+          }else{
+            var message = $('#tweetarea').val();
+            writeTweet(message);
+            $('#tweetarea').val('');
+            var tweet = streams.users[visitor][streams.users[visitor].length-1];
+            var $tweet = $('<div></div>');
+            var $timeSince = $('<span class="timeSince"></span>');
+            $timeSince.text(" " + jQuery.timeago(tweet.created_at));
+            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+            $timeSince.appendTo($tweet);
+            $tweet.prependTo($('.mainbody'));
+            $tweet.animate({opacity: .8}, 700);
+
+          }
+        })
         $('.backgrounds').on("click", "li", function(){
+          $('.highlight').removeClass('highlight')
           var whichButton = $(this).text();
           var $body = $('.mainbody');
           $body.html('');
+          $(this).addClass("highlight")
           if (whichButton === 'all'){
             var index = streams.home.length - 1;
             while(index >= 0){
               var tweet = streams.home[index];
               var $tweet = $('<div></div>');
-              $tweet.text(jQuery.timeago(tweet.created_at)+ ': @' + tweet.user + ': ' + tweet.message);
+              var $timeSince = $('<span class="timeSince"></span>');
+              $timeSince.text(" " + jQuery.timeago(tweet.created_at));
+              $tweet.text('@' + tweet.user + ': ' + tweet.message);
+              $timeSince.appendTo($tweet);
               $tweet.appendTo($body);
+              $tweet.animate({opacity: .8}, 700);
               index -= 1;
             }
           } else {
-            var index2 = streams.users[whichButton].length - 1;
-            while(index2 >= 0){
-              var tweet2 = streams.users[whichButton][index2];
-              var $tweet2 = $('<div></div>');
-              $tweet2.text(jQuery.timeago(tweet2.created_at) + ': @' + tweet2.user + ': ' + tweet2.message);
-              $tweet2.appendTo($body);
-              index2 -= 1;
+            var index = streams.users[whichButton].length - 1;
+            while(index >= 0){
+              var tweet = streams.users[whichButton][index];
+              var $tweet = $('<div></div>');
+              var $timeSince = $('<span class="timeSince"></span>');
+              $timeSince.text(" " + jQuery.timeago(tweet.created_at));
+              $tweet.text('@' + tweet.user + ': ' + tweet.message);
+              $timeSince.appendTo($tweet);
+              $tweet.appendTo($body);
+              $tweet.animate({opacity: .8}, 1000);
+              index -= 1;
             }
           }
         });
